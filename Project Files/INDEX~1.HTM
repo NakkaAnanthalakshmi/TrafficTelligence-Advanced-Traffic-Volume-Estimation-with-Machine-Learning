@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Volume Estimation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e0f7fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            padding: 25px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #00695c;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+        }
+        .btn {
+            background: #00796b;
+            color: white;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #004d40;
+        }
+        .result {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Traffic Volume Estimation</h2>
+        <form action="/predict" method="post">
+
+            <!-- ✅ Changed to match LabelEncoder training strings -->
+            <label for="holiday">Holiday</label>
+            <select name="holiday" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label for="temp">Temperature</label>
+            <input type="number" step="any" name="temp" required>
+
+            <label for="rain">Rain</label>
+            <input type="number" step="any" name="rain" required>
+
+            <label for="snow">Snow</label>
+            <input type="number" step="any" name="snow" required>
+
+            <!-- ✅ Weather should also match training data -->
+            <label for="weather">Weather</label>
+            <select name="weather" required>
+                <option value="Clouds">Clouds</option>
+                <option value="Clear">Clear</option>
+                <option value="Rain">Rain</option>
+                <option value="Snow">Snow</option>
+                <option value="Fog">Fog</option>
+                <option value="Drizzle">Drizzle</option>
+                <option value="Mist">Mist</option>
+                <option value="Haze">Haze</option>
+            </select>
+
+            <label for="year">Year</label>
+            <input type="number" name="year" required>
+
+            <label for="month">Month</label>
+            <input type="number" name="month" required>
+
+            <label for="day">Day</label>
+            <input type="number" name="day" required>
+
+            <label for="hours">Hours</label>
+            <input type="number" name="hours" required>
+
+            <label for="minutes">Minutes</label>
+            <input type="number" name="minutes" required>
+
+            <label for="seconds">Seconds</label>
+            <input type="number" name="seconds" required>
+
+            <input type="submit" value="Predict" class="btn">
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
